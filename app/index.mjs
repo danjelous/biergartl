@@ -1,30 +1,13 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
 import express from 'express';
 import jsdom from 'jsdom';
 const { JSDOM } = jsdom;
 
 const app = express();
-if (process.env.NODE_ENV !== 'production') {
-  dotenv.config();
-}
 
 app.get('/', (req, res) => {
   res.send('Up and running');
 });
-
-const postSlackMessage = msg => {
-  axios.post(process.env.SLACK_HOOK, {
-      'text': `${msg} :beers:`,
-      'response_type': 'in_channel',
-    })
-    .then((response) => {
-      console.log('Sent beer to slack!');
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
 
 const getBeer = (req, res) => {
   console.log('Getting beer...');
@@ -34,8 +17,10 @@ const getBeer = (req, res) => {
       console.log('Got beer!');
       const openingHours = dom.window.document.querySelector('#Geöffnet-oder-Geschlossen p').textContent;
       console.log(openingHours);
-      postSlackMessage(openingHours);
-      res.send(openingHours);
+      res.send({
+        'text': `${openingHours} :beers:`,
+        'response_type': 'in_channel',
+      });
     })
     .catch((error) => {
       console.log(error);
@@ -43,9 +28,9 @@ const getBeer = (req, res) => {
     });
 };
 
+app.get('/bier', getBeer);
 app.post('/bier', getBeer);
 
 app.listen(process.env.PORT || 8000, () => {
   console.log(`Server started on port ${process.env.PORT || 8000}`);
-  getBeer();
 });
