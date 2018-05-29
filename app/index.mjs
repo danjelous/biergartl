@@ -15,7 +15,8 @@ app.get('/', (req, res) => {
 
 const postSlackMessage = msg => {
   axios.post(process.env.SLACK_HOOK, {
-      'text': `${msg} :beers:`
+      'text': `${msg} :beers:`,
+      'response_type': 'in_channel',
     })
     .then((response) => {
       console.log('Sent beer to slack!');
@@ -42,7 +43,7 @@ const getBeer = (req, res) => {
     });
 };
 
-app.get('/bier', getBeer);
+app.post('/bier', getBeer);
 
 app.listen(process.env.PORT || 8000, () => {
   console.log(`Server started on port ${process.env.PORT || 8000}`);
