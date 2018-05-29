@@ -1,0 +1,25 @@
+{
+  "name": "biergartl",
+  "version": "1.0.0",
+  "description": "Biergartl slack integration",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --experimental-modules app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AkarionOfficial/biergartl.git"
+  },
+  "author": "Daniel Brunner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AkarionOfficial/biergartl/issues"
+  },
+  "homepage": "https://github.com/AkarionOfficial/biergartl#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.3",
+    "jsdom": "^11.11.0"
+  }
+}
