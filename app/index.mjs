@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
   res.send('Up and running');
 });
 
-const getBeer = () => {
+const getBeer = (req, res) => {
   console.log('Getting beer...');
   axios.get('http://www.biergartl-linz.at/')
     .then((response) => {
