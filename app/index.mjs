@@ -15,7 +15,7 @@ const getBeer = (req, res) => {
     .then((response) => {
       const dom = new JSDOM(response.data);
       console.log('Got beer!');
-      const openingHours = dom.window.document.querySelector('#Geöffnet-oder-Geschlossen p').textContent;
+      const openingHours = dom.window.document.querySelector('#Geöffnet-oder-Geschlossen .textwidget').textContent;
       console.log(openingHours);
       res.send({
         'text': `${openingHours} :beers:`,
